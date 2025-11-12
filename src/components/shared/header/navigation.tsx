@@ -4,7 +4,6 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -28,14 +27,12 @@ const Navigation = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
- 
-
   const handleLogout = () => {
     console.log("Logging out...");
   };
 
   return (
-    <nav className="boxWidth w-full h-16 flex items-center justify-between">
+    <nav className="boxWidth w-full h-16 flex items-center justify-between p-2">
       {/* Logo */}
       <Link to="/" className="flex items-center space-x-2">
         <Ticket className="h-6 w-6 text-primary" />
@@ -116,21 +113,14 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <SheetTrigger asChild className="md:hidden">
-          <Button variant="ghost" size="icon">
-            <Menu className="h-6 w-6" />
+        <SheetTrigger asChild className="md:hidden ">
+          <Button variant="ghost" size="lg">
+            <Menu className="h-8 w-8" />
             <span className="sr-only">Toggle menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-          <SheetHeader>
-            <SheetTitle>
-              <div className="flex items-center space-x-2">
-                <Ticket className="h-5 w-5 text-primary" />
-                <span>TicketHub</span>
-              </div>
-            </SheetTitle>
-          </SheetHeader>
+        <SheetContent side="right" className="w-full p-1">
+          <SheetHeader></SheetHeader>
 
           <div className="mt-8 flex flex-col space-y-4">
             {/* Mobile Nav Links */}
