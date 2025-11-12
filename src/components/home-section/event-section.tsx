@@ -79,7 +79,7 @@ const EventSection = () => {
                   <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
                     {/* Image */}
                     <img
-                      src={feature.image}
+                      src={`${feature.image}`}
                       alt={feature.imageAlt}
                       className="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-500 group-hover:scale-105"
                     />

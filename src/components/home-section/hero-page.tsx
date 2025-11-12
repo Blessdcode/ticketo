@@ -9,7 +9,7 @@ const HeroPage = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img
-          src="/src/assets/hero-page.jpg"
+          src="/assets/hero-page.jpg"
           alt="Events background"
           className="w-full h-full object-cover"
         />
