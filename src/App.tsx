@@ -1,11 +1,14 @@
+import { Outlet } from "react-router-dom";
+import Navigation from "./components/shared/header/navigation";
 
-
-function App() {
-
+const App = () => {
   return (
-    <>holl</>
-    
-  )
-}
+    <div>
+      <Navigation />
+      <Outlet />
+      {/* <Footer /> */}
+    </div>
+  );
+};
 
-export default App
+export default App;
