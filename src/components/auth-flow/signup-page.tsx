@@ -64,7 +64,7 @@ const SignupPage = () => {
   const passwordStrength = getPasswordStrength(formData.password);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-muted/50 via-background to-muted/30 px-4 py-12">
+    <div className="min-h-fit flex items-center justify-center bg-gradient-to-br from-muted/50 via-background to-muted/30 px-4 py-12">
       <Card className="w-full max-w-2xl shadow-xl">
         <CardHeader className="space-y-1 text-center pb-8">
           <div className="flex justify-center mb-4">
