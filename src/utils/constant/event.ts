@@ -53,7 +53,7 @@ export const features = [
     imageAlt: "Group of friends at an event",
     icon: Users,
     ctaText: "Join Community",
-    ctaLink: "/auth/signup",
+    ctaLink: "/signup",
   },
   {
     id: 4,

@@ -1,9 +1,8 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import {
   Card,
@@ -13,47 +12,44 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Ticket, Eye, EyeOff, Mail, Lock, Loader2 } from "lucide-react";
+import { Form } from "@/components/ui/form";
+import { Ticket, Mail, Lock, Loader2 } from "lucide-react";
+import {
+  signInFormSchema,
+  type SignInFormValues,
+} from "@/utils/constant/form-schema/auth-schema";
+import { FormInput } from "../shared/form/form-input";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
+
+  const form = useForm<SignInFormValues>({
+    mode: "onChange",
+
+    resolver: zodResolver(signInFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (values: SignInFormValues) => {
     setIsLoading(true);
-
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      // Replace with actual authentication logic
-      console.log("Login data:", formData);
-
-      navigate("/dashboard");
+      console.log("login values:", values);
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error("Signup error:", error);
     } finally {
       setIsLoading(false);
     }
   };
-
- 
-
   return (
     <div className="min-h-fit flex items-center justify-center bg-muted/30 px-4 py-12">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-lg">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
             <Link to="/" className="flex items-center space-x-2">
@@ -68,90 +64,49 @@ const LoginPage = () => {
         </CardHeader>
 
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email Field */}
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  className="pl-10"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  className="pl-10 pr-10"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-muted-foreground hover:text-foreground">
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="remember"
-                  checked={formData.rememberMe}
-                  onCheckedChange={(checked) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      rememberMe: checked as boolean,
-                    }))
-                  }
-                />
-                <label
-                  htmlFor="remember"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  Remember me
-                </label>
-              </div>
-              <Link
-                to="/auth/forgot-password"
-                className="text-sm text-primary hover:underline">
-                Forgot password?
-              </Link>
-            </div>
-
-            {/* Submit Button */}
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <div className="space-y-2">
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Logging in...
+                  <FormInput
+                    control={form.control}
+                    name="email"
+                    label="Email Address"
+                    placeholder="you@example.com"
+                    type="email"
+                    icon={Mail}
+                    required
+                  />
+
+                  <FormInput
+                    control={form.control}
+                    name="password"
+                    label="Password"
+                    placeholder="••••••••"
+                    type="password"
+                    icon={Lock}
+                    required
+                  />
                 </>
-              ) : (
-                "Log in"
-              )}
-            </Button>
-          </form>
+                <Link to="/forgot-password" className="text-sm text-primary">
+                  Forgot Password?
+                </Link>
+              </div>
+              <Button
+                type="submit"
+                className="w-full h-11 text-base"
+                disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Logging in...
+                  </>
+                ) : (
+                  "Login"
+                )}
+              </Button>
+            </form>
+          </Form>
         </CardContent>
 
         <CardFooter className="flex flex-col space-y-4">
@@ -159,7 +114,7 @@ const LoginPage = () => {
           <p className="text-center text-sm text-muted-foreground">
             Don't have an account?{" "}
             <Link
-              to="/auth/signup"
+              to="/signup"
               className="font-medium text-primary hover:underline">
               Sign up
             </Link>

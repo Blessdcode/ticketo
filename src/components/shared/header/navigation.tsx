@@ -102,10 +102,10 @@ const Navigation = () => {
         ) : (
           <>
             <Button variant="ghost" asChild>
-              <Link to="/auth/login">Login</Link>
+              <Link to="/login">Login</Link>
             </Button>
             <Button asChild>
-              <Link to="/auth/signup">Sign Up</Link>
+              <Link to="/signup">Sign Up</Link>
             </Button>
           </>
         )}
@@ -186,14 +186,14 @@ const Navigation = () => {
                 <>
                   <Button variant="outline" className="w-full" asChild>
                     <Link
-                      to="/auth/login"
+                      to="/login"
                       onClick={() => setMobileMenuOpen(false)}>
                       Login
                     </Link>
                   </Button>
                   <Button className="w-full" asChild>
                     <Link
-                      to="/auth/signup"
+                      to="/signup"
                       onClick={() => setMobileMenuOpen(false)}>
                       Sign Up
                     </Link>

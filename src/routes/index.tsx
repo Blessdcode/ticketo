@@ -5,15 +5,20 @@ import Event from "@/page/event/event";
 import NotFound from "@/page/not-found";
 import Login from "@/page/auth/login";
 import Register from "@/page/auth/register";
+import VerifyEmail from "@/components/auth-flow/verify-email";
+import ResetPasswordPage from "@/components/auth-flow/reset-password";
 import ForgotPasswordPage from "@/components/auth-flow/forgot-password";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
 
     children: [
+      {
+        path: "*",
+        element: <NotFound />,
+      },
       {
         path: "/",
         element: <Home />,
@@ -23,15 +28,23 @@ export const router = createBrowserRouter([
         element: <Event />,
       },
       {
-        path: "/auth/login",
+        path: "/login",
         element: <Login />,
       },
       {
-        path: "/auth/signup",
+        path: "/signup",
         element: <Register />,
       },
       {
-        path: "/auth/forgot-password",
+        path: "/reset-password",
+        element: <ResetPasswordPage />,
+      },
+      {
+        path: "/verify-email",
+        element: <VerifyEmail />,
+      },
+      {
+        path: "/forgot-password",
         element: <ForgotPasswordPage />,
       },
     ],

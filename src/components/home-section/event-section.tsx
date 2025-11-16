@@ -125,7 +125,7 @@ const EventSection = () => {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/auth/signup">Create Account</Link>
+              <Link to="/signup">Create Account</Link>
             </Button>
           </div>
         </div>

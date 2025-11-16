@@ -1,4 +1,4 @@
-import ForgotPasswordPage from "@/components/auth-flow/forgot-password";
+import ForgotPasswordPage from "@/components/auth-flow/reset-password";
 
 const ForgotPassword = () => {
   return <ForgotPasswordPage />;

@@ -1,6 +1,4 @@
 type FormData = {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -9,13 +7,6 @@ type FormData = {
 export const validateForm = (formData: FormData) => {
   const newErrors: Record<string, string> = {};
 
-  if (!formData.firstName.trim()) {
-    newErrors.firstName = "First name is required";
-  }
-
-  if (!formData.lastName.trim()) {
-    newErrors.lastName = "Last name is required";
-  }
 
   if (!formData.email.trim()) {
     newErrors.email = "Email is required";
