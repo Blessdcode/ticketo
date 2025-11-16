@@ -87,7 +87,7 @@ export function FormMultiSelect<T extends FieldValues>({
                     <Badge
                       key={value}
                       variant="secondary"
-                      className="pl-3 pr-1 py-1">
+                      className="pl-3 pr-1 py-1 bg-primary text-white">
                       {option?.label}
                       <button
                         type="button"
@@ -130,12 +130,11 @@ export function FormMultiSelect<T extends FieldValues>({
               </SelectContent>
             </Select>
 
-            {/* Selection Counter */}
-            {maxSelections && (
+            {/* {maxSelections && (
               <p className="text-xs text-muted-foreground">
                 {selectedValues.length} / {maxSelections} selected
               </p>
-            )}
+            )} */}
 
             <FormMessage />
           </FormItem>
