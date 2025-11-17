@@ -50,9 +50,7 @@ export function FormMultiSelect<T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => {
-        const selectedValues: string[] = Array.isArray(field.value)
-          ? field.value
-          : [];
+        const selectedValues: string[] = Array.isArray(field.value) ? field.value : [];
         const availableOptions = options.filter(
           (option) => !selectedValues.includes(option.value)
         );
@@ -61,13 +59,13 @@ export function FormMultiSelect<T extends FieldValues>({
           if (maxSelections && selectedValues.length >= maxSelections) {
             return;
           }
-
+          
           const newValue = [...selectedValues, value];
           field.onChange(newValue);
         };
 
         const handleRemove = (value: string) => {
-          const newValue = selectedValues.filter((v: string) => v !== value);
+          const newValue = selectedValues.filter((v) => v !== value);
           field.onChange(newValue);
         };
 
@@ -77,23 +75,25 @@ export function FormMultiSelect<T extends FieldValues>({
               {label} {required && <span className="text-destructive">*</span>}
             </FormLabel>
             {description && <FormDescription>{description}</FormDescription>}
-
+            
             {/* Selected Items Display */}
             {selectedValues.length > 0 && (
-              <div className="flex flex-wrap gap-2 p-3 border rounded-md bg-muted/30 w-full">
-                {selectedValues.map((value: string) => {
+              <div className="flex flex-wrap gap-2 p-3 border rounded-md bg-muted/30">
+                {selectedValues.map((value) => {
                   const option = options.find((o) => o.value === value);
                   return (
                     <Badge
                       key={value}
                       variant="secondary"
-                      className="pl-3 pr-1 py-1 bg-primary text-white">
+                      className="pl-3 pr-1 py-1"
+                    >
                       {option?.label}
                       <button
                         type="button"
                         onClick={() => handleRemove(value)}
                         disabled={disabled}
-                        className="ml-2 hover:bg-muted rounded-full p-0.5">
+                        className="ml-2 hover:bg-muted rounded-full p-0.5"
+                      >
                         <X className="h-3 w-3" />
                       </button>
                     </Badge>
@@ -102,15 +102,14 @@ export function FormMultiSelect<T extends FieldValues>({
               </div>
             )}
 
+            {/* Select Dropdown */}
             <Select
               onValueChange={handleSelect}
-              disabled={
-                disabled ||
-                (maxSelections ? selectedValues.length >= maxSelections : false)
-              }>
+              disabled={disabled || (maxSelections ? selectedValues.length >= maxSelections : false)}
+            >
               <FormControl>
                 <SelectTrigger>
-                  <SelectValue placeholder={selectedValues} />
+                  <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
@@ -129,13 +128,8 @@ export function FormMultiSelect<T extends FieldValues>({
                 )}
               </SelectContent>
             </Select>
-
-            {/* {maxSelections && (
-              <p className="text-xs text-muted-foreground">
-                {selectedValues.length} / {maxSelections} selected
-              </p>
-            )} */}
-
+          
+            
             <FormMessage />
           </FormItem>
         );
