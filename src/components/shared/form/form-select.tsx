@@ -110,7 +110,7 @@ export function FormMultiSelect<T extends FieldValues>({
               }>
               <FormControl>
                 <SelectTrigger>
-                  <SelectValue placeholder={placeholder} />
+                  <SelectValue placeholder={selectedValues} />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>

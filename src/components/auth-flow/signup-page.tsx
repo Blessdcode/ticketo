@@ -47,7 +47,7 @@ const SignupPage = () => {
       });
       console.log("Signup values:", values);
 
-      navigate("/verify-email", { state: { email: values.email } });
+      navigate("/login");
     } catch (error) {
       console.error("Signup error:", error);
     } finally {
@@ -87,8 +87,8 @@ const SignupPage = () => {
               <FormMultiSelect
                 control={form.control}
                 name="preference"
-                label="Event Preferences"
-                placeholder="Select your preferences"
+                label="What event do your like?"
+                // placeholder="Select your preferences"
                 options={PREFERENCE_OPTIONS}
                 maxSelections={5}
                 required
