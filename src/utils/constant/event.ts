@@ -74,3 +74,42 @@ export const features = [
     ctaLink: "/about",
   },
 ];
+
+export const MOCK_EVENTS = [
+  {
+    id: "1",
+    title: "ATL FUNFAIR 2025 -",
+    image:
+      "https://res.cloudinary.com/tix-africa/image/upload/f_webp,fl_lossy,q_70/v1762056915/p4taf7z9niqsma79qh7r.webp",
+    date: "Sunday, November 23rd 2025",
+    time: "12:00 PM - 7:00 PM UTC",
+    location: "Wole Olateju Crescent - Lekki Phase 1",
+    price: "₦10,900",
+    category: "Music",
+    isFree: false,
+  },
+  {
+    id: "2",
+    title: "Heirs Insurance Travel Festival 2025!",
+    image:
+      "https://res.cloudinary.com/tix-africa/image/upload/f_webp,fl_lossy,q_70/v1761380834/l2qhv4netjqafqgij8ry.webp",
+    date: "Saturday, November 29th 2025",
+    time: "12:00 PM - 4:00 PM UTC",
+    location: "Harbour Point, 4 Wilmot Point Rd, Victoria Island, Lagos",
+    price: "Free",
+    category: "Business",
+    isFree: true,
+  },
+  {
+    id: "3",
+    title: "OhEmGee Faaji Friday 8.0 ",
+    image:
+      "https://res.cloudinary.com/tix-africa/image/upload/f_webp,fl_lossy,q_70/v1757617009/ksd0onvmh44kqohne59j.webp",
+    date: "Friday, December 19th 2025",
+    time: "4:00 PM - 12:00 AM UTC",
+    location: "Daystar Christian Center, Plot A3C Ikosi Road, Oregun, Lagos",
+    price: "₦10,900",
+    category: "Comedy",
+    isFree: false,
+  },
+];
