@@ -29,19 +29,16 @@ const EventsCards = () => {
         Showing {MOCK_EVENTS.length} events
       </p>
 
-      {/* Event Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {MOCK_EVENTS.map((event) => (
           <Link key={event.id} to={`/events/${event.id}`} className="group">
             <div className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-              {/* Event Image */}
               <div className="relative aspect-[16/9] bg-muted">
                 <img
                   src={event.image}
                   alt={event.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                {/* Wishlist Button */}
                 <button
                   onClick={(e) => {
                     e.preventDefault();
