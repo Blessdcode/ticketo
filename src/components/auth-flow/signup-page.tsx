@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,10 +21,15 @@ import { FormInput } from "../shared/form/form-input";
 import { FormMultiSelect } from "../shared/form/form-select";
 import { PREFERENCE_OPTIONS } from "@/utils/constant/form-schema/preference";
 import { toast } from "sonner";
+import { useRequest } from "@/api/hooks/useRequest";
+import { register } from "@/api/service/auth.service";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const { queryFn: registerFn, loading: isLoading } = useRequest(
+    register,
+    "register"
+  );
 
   const form = useForm<SignUpFormValues>({
     mode: "onChange",
@@ -39,20 +43,15 @@ const SignupPage = () => {
   });
 
   const onSubmit = async (values: SignUpFormValues) => {
-    setIsLoading(true);
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      toast.success("Registration complete", {
-        description: "Account register successfully!",
-      });
-      console.log("Signup values:", values);
-
-      navigate("/login");
-    } catch (error) {
-      console.error("Signup error:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    registerFn(values, {
+      onSuccess: () => {
+        toast.success("Registration successful! Verify email to continue");
+        navigate("/login");
+      },
+      onError: (error) => {
+        toast.error(`${error}`);
+      },
+    });
   };
 
   return (
@@ -131,7 +130,8 @@ const SignupPage = () => {
               <Button
                 type="submit"
                 className="w-full h-11 text-base"
-                disabled={isLoading}>
+                disabled={isLoading}
+              >
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -151,7 +151,8 @@ const SignupPage = () => {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-semibold text-primary hover:underline">
+              className="font-semibold text-primary hover:underline"
+            >
               Log in
             </Link>
           </p>
